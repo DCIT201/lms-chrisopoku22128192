@@ -1,5 +1,7 @@
-public class Book {
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+package org.example;
 
-    // This is your working class.
-    
+public record Book(String title, String author, int yearPublished) {
+    // Constructor
 }
