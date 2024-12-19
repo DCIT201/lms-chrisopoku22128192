@@ -1,19 +1,41 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Patron {
     private final String name;
-    private final String id;
+    private final ArrayList<Book> borrowedBooks;
 
-    // Constructor
-    public Patron(String name, String id) {
+    public Patron(String name, int id) {
         this.name = name;
-        this.id = id;
+        borrowedBooks = new ArrayList<>();
     }
 
-    // Display patron details
-    public void displayPatronInfo() {
-        System.out.println("Patron Name: " + name);
-        System.out.println("Patron ID: " + id);
+    public void borrowBook(Book book, Library library) {
+        if (library.removeBook(book.title())) {
+            borrowedBooks.add(book);
+            System.out.println(name + " borrowed " + book.title());
+        } else {
+            System.out.println("Book not available.");
+        }
+    }
+
+    public void returnBook(Book book, Library library) {
+        if (borrowedBooks.remove(book)) {
+            library.addBook(book);
+            System.out.println(name + " returned " + book.title());
+        } else {
+            System.out.println("You don't have this book.");
+        }
+    }
+
+    public void listBorrowedBooks() {
+        if (borrowedBooks.isEmpty()) {
+            System.out.println("No books borrowed.");
+        } else {
+            for (Book book : borrowedBooks) {
+                System.out.println(book.title());
+            }
+        }
     }
 }
-
